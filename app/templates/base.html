@@ -11,7 +11,54 @@
   <title> {% block title %} Giant Admin {%endblock %}</title>
 
   <link href={{url_for("static", filename="vendor/fontawesome-free/css/all.min.css")}} rel="stylesheet" type="text/css">
-  <link href={{url_for("static", filename="css/boards/styles.css"}} rel="stylesheet" type="text/css">
+  <link href={{url_for("static", filename="css/boards/styles.css")}} rel="stylesheet" type="text/css">
  </head>
-<body></body>
+  <link href={{url_for("static", filename="")}} rel="stylesheet">
+
+<body id="page-top">
+  <!-- Wrapper for the entire page -->
+  <div id="wrapper">
+   <!-- Sidebar Navigation -->
+   {% include "sidebar.html" %}
+   <!-- End of Sidebar -->
+
+   <!-- Content Wrapper -->
+     <div id="content-wrapper" class="d-flex flex-column">
+       <div id="content">
+     <!-- Topbar -->
+     {% include "nav.html" %}
+     <!-- End of Topbar -->
+
+         <div id="container-fluid">
+            {% block content %}
+
+            {% endblock %}
+         </div><!-- Container fluid -->
+	 <!-- Footer Start -->
+	 <footer class="sticky-footer bg-white">
+	  {% include "footer.html" %}
+	 </footer>
+	 <!-- End of Footer -->
+     </div><!-- End of Main Content -->
+    </div><!--End of Content Wrapper -->
+   </div><!-- End of Page Wrapper -->
+   
+   <!-- Scroll To the top-->
+   <a class="scroll-to-top-rounded" href="#page-top">
+     <i class="fas fa-angle-up"></i>
+   </a>
+
+   <!-- Logout Modal -->
+   <!-- End Logout MOdal-->
+
+   <!-- Bootstrap Javascript Core Library-->
+      <script src={{ url_for("static", filename="vendor/jquery/jquery.min.js")}}></script>
+      <script src={{ url_for("static", filename="vendor/bootstrap/js/bootstrap.bundle.min.js")}}></script>
+      <script src={{ url_for("static", filename="vendor/jquery-easing/jquery.easing.min.js")}}></script>
+      <script src={{ url_for("static", filename="vendor/chart.js/Chart.min.js")}}></script>
+      <script src={{ url_for("static", filename="js/scripts.min.js")}}></script>
+      <script src={{ url_for("static", filename="js/demo/chart-area-demo.js")}}></script>
+      <script src={{ url_for("static", filename="js/demo/chart-pie-demo.js")}}></script>
+
+</body>
 </html>
