@@ -1,8 +1,8 @@
-from app import create_app
+#from app import create_app
+from flask import Flask
+import pytest
 
-def test_home_page():
-
-    flask_app = create_app()
-    with flask_app.test_client() as test_client:
-        response = test_client.get('/')
-        assert response.status_code ==200
+def test_home_page(test_client):
+    response = test_client.get('/')
+    assert response.status_code ==200
+    assert_template_used("hello.html")

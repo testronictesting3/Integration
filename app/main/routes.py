@@ -3,4 +3,4 @@ from app.main import main
 
 @main.route("/", methods=['GET','POST'])
 def mainRoute():
-    return "Main Route for app"
+    return "Main Route "
