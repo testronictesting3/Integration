@@ -8,4 +8,4 @@ def mainRoute():
 
 @main.route("/", methods=["GET"])
 def mainTemplate():
-    return render_template("base.html")
+    return render_template("main/index.html")
