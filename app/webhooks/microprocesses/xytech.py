@@ -34,16 +34,15 @@ class Xytech():
 
 
     def typeFilter(self, type):
+		with open("app/webhooks/typesFilter.py", "r") as filter:
+			data = filter.read()
 
-	with open("app/webhooks/typesFilter.py", "r") as filter:
-	    data = filter.read()
+		data = json.loads(data)
 
-	data = json.loads(data)
-
-	if len(type) == 2:
-	    first = type[0]
-	    second = int(type[1])
-	    t = types.get(a, "type does not exist")
-	    return t[second]
-	else:
-	    return types.get(t, "type does not exist.")
+		if len(type) == 2:
+			first = type[0]
+			second = int(type[1])
+			t = types.get(a, "type does not exist")
+			return t[second]
+		else:
+			return types.get(t, "type does not exist.")

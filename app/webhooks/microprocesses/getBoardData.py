@@ -1,7 +1,7 @@
 import sys
 import json
 import requests
-from ./monday import Monday
+from monday import Monday
 
 if __name__=="__main__":
     s = sys.argv[1:]

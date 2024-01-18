@@ -29,7 +29,7 @@ def post_route():
     m.loadingStatus()
     
     #Retrieve board data from monday
-    process= subprocess.run(['python3', 'app/webhooks/getBoardData.py', str(boardId), str(itemId)], capture_output=True)
+    process= subprocess.run(['python3', 'app/webhooks/microprocess/getBoardData.py', str(boardId), str(itemId)], capture_output=True)
     mondayReturnjson = process.stdout
     data = mondayReturnjson.decode('utf-8')
     print(data)
@@ -39,7 +39,7 @@ def post_route():
     #Update the xytech status for the board
     m.updatingXytech()
     print("--"*15 + "STARTING xytech microprocess" + "--"*15) 
-    proc = subprocess.run(['python3', 'app/webhooks/pushXytechData.py', data, str(itemId)], capture_output=True)
+    proc = subprocess.run(['python3', 'app/webhooks/microprocess/pushXytechData.py', data, str(itemId)], capture_output=True)
     print(proc)
     if proc.returncode == 1:
         m.failedStatus()
@@ -48,9 +48,3 @@ def post_route():
     print("--"*15 + "running Xytech microprocess" + "--"*15)
     return {"Process": "Complete"}
 
-# @webhook.route('/hooks', methods=['GET'])
-# def hooks():
-#     proc = subprocess.run(['python3', 'app/webhooks/microprocesses/getBoardData.py'], capture_output=True)
-#     outt = proc.stdout
-#     out = out.decode('utf-8')
-#     output = json.loads(data)
