@@ -1,6 +1,9 @@
+import os
+import subprocess
 from app.webhooks import webhook
-from flask import render_template, Flask
-
+from app.extensions import db
+from app.webhooks.monday import Monday
+from flask import Flask render_template, request, url_for, redirect, jsonify, json
 
 @webhook.route('/', methods=['GET'])
 def index():

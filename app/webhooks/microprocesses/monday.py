@@ -2,7 +2,6 @@ import requests
 import json
 import os
 
-
 class Monday:
     def __init__(self, itemId=None, boardId=None):
         self.itemId = itemId
@@ -12,6 +11,7 @@ class Monday:
         self.HEADERS = {"Authorization": self.KEY,
                         "API-version": "2023-04", "Content-Type": "application/json"}
 
+    ##### UTILITY FUNCTIONS #####
     def setIds(self, itemId, boardId):
         try:
             if itemId.isdigit() == True and boardId.isdigit() == True:
@@ -24,6 +24,14 @@ class Monday:
 
     def getUrl(self):
         return self.URL
+
+    def specFilter(self):
+        with open('app/webhooks/util/filterMap.json', 'r') as filter:
+            data = filter.read()
+        data = json.loads(data)
+
+        # returns an array
+        return data
 
     # A function to deliver all requests to monday server and return the json response.
     def deliver(self, payload):
@@ -50,18 +58,25 @@ class Monday:
         query = f"""query{{items(ids: {self.itemId}){{id name column_values{{id value }}}}}}"""
         return self.deliver(payload)
 
+    def querySubitemsBoardId(self, boardId):
+        query = f"""query{{ boards(ids: {boardId}){{items_page(limit: 1){{ items{{subitems{{board{{ id }}}}}}}}}}}}"""
+        return {"query": query}
+
+    #### THE FOLLOWING ARE ONLY TO CREATE BOARD DATA ####
     # 3 create methods are needed: create_group()
     #                              create_item()
-    # create_subitem()
+    #                              create_subitem()
     def createGroup(self, name):
-        payload = f"""mutation{{ create_group(board_id: #, group_name: "{name}"){{id}}}}"""
+        payload = f"""mutation{{ create_group(board_id: "5359834992", group_name: "{name}"){{id}}}}"""
         self.deliver(payload)
 
     def create_item(self, group, episode):
-        pass
+        payload = f"""mutation{{create_item(board_id:5359834992  ,group_id: "{group}",item_name: "{episode}"){{id}}}}"""
+        self.deliver(payload)
 
-    def create_subitem(self, itemId, item, assetId, specNo, spec_filter):
-        pass
+    def createSubItem(self, item_id, item,  assetId, spec_no, filt, extension):
+        query= f"""mutation{{create_subitem(parent_item_id: "{item_id}", item_name: "{item}", column_values:"{{\\\"status\\\": \\\"0\\\", \\\"asset_id\\\": \\\"{assetId}\\\", \\\"service_spec_no6\\\": \\\"{spec_no}\\\", \\\"type_filter\\\": \\\"{filt}\\\", \\\"file_extension\\\": \\\"{extension}\\\"}}"){{id}}}}"""
+        self.deliver(query)
 
     # Need status updates for each possible status : [loading, failed, updating, invalidAsset, servererror? success ]
 
