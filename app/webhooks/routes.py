@@ -2,16 +2,18 @@ import os
 import subprocess
 from app.webhooks import webhook
 from app.extensions import db
-from app.webhooks.monday import Monday
-from flask import Flask render_template, request, url_for, redirect, jsonify, json
+from app.webhooks.microprocesses.monday import Monday
+from flask import Flask, render_template, request, url_for, redirect, jsonify, json
+
 
 @webhook.route('/', methods=['GET'])
 def index():
     return render_template("webhooks/home.html")
 
+
 @webhook.route('/', methods=['POST'])
 def post_route():
-        try:
+    try:
         data = request.get_json()
     except Exception as e:
         return jsonify({"error": str(e)}), 400
@@ -20,7 +22,7 @@ def post_route():
     if request.headers['Content-Length'] == '102':
         response = { "challenge" : data['challenge']}
         return response
-     
+
     print("--"*15 + "running Monday microprocess" + "--"*15)
     event = data['event']
     boardId = event['boardId']
