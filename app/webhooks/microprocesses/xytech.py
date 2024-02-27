@@ -18,8 +18,14 @@ class Xytech():
     def __setQuery__(self,query):
 	self.query = query
 
-    def __setIds__(self, assetId, serviceSpecId):
-	pass
+    def setIds(self, assetId, serviceSpecId):
+        a, b = str(assetId), str(serviceSpecId)
+
+        if not a.isdigit() or not b.isdigit():
+            return "Invalid assetID or Service Spec ID"
+        
+        self.assetId = assetId
+        self.serviceSpecId = serviceSpecId
 
     def patchRequest(self, data):
 	pass

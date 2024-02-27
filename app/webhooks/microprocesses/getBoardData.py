@@ -3,7 +3,17 @@ import json
 import requests
 from monday import Monday
 
-jsonVals = {"status" : "test", "status_1" : "test", "asset_id": "test", "delivery_eta":"test", "qc_pass_date" :" test" , "revision_number": "test", "revision_date" : "test", "final_delivery":"test", "service_spec_no6": "test", "type_filter":"test"}
+jsonVals = {
+    "status":"test",
+     "status_1":"test",
+     "asset_id":"test",
+     "delivery_eta":"test",
+     "qc_pass_date":"test" ,
+     "revision_number":"test",
+     "revision_date":"test",
+     "final_delivery":"test",
+     "service_spec_no6":"test",
+     "type_filter":"test"}
 
 if __name__=="__main__":
     s = sys.argv[1:]
