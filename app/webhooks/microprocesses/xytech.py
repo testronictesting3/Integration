@@ -7,7 +7,7 @@ class Xytech():
 	#LIVE
 	self.URL = os.environ.get("XYTECH_LIVE_URL")
 	self.UN = os.environ.get("XYTECH_LIVE_USER")
-    self.PW = os.environ.get("XYTECH_LIVE_SECRET")
+        self.PW = os.environ.get("XYTECH_LIVE_SECRET")
 	self.assetId = assetId
 	self.serviceSpecNo = 0
 	self.serviceRowNo = 0
@@ -23,7 +23,7 @@ class Xytech():
 
         if not a.isdigit() or not b.isdigit():
             return "Invalid assetID or Service Spec ID"
-        
+
         self.assetId = assetId
         self.serviceSpecId = serviceSpecId
 
@@ -35,7 +35,7 @@ class Xytech():
             return {"ERROR": "No Data was received "}
 
         try:
-		    payload = self.URL + data
+            payload = self.URL + data
             response = request.get(url=payload, auth=(self.UN, self.PW))
             response.raise_for_status()
             json_response_data = response.json()

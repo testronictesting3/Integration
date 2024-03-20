@@ -5,3 +5,5 @@ venv/
 */.pyc
 */.tar
 */.save
+.save
+.pyc
