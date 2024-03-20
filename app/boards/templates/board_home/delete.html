@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}                <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Job Title should go here</h1>
+    <!-- <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme.
+        The charts below have been customized - for further customization options, please visit the <a
+            target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js
+            documentation</a>.</p> -->
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-10">
+            <!-- Area Chart -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{data.title}}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                      <table>
+                        <thead>
+                            <tr>
+                                <th>Service number</th>
+                                <th>Service Description</th>
+                                <th>Deliverable</th>
+                                <!-- <th>Sequence</th>
+                                <th>COlumn 5</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for i in range(10,25) %}
+                            <tr>
+                                
+                                <td>{{data.service_rows[i]}}</td>
+                                <td>{{data.service_specs[i]}}</td>
+                                <td>{{data.service_pros[i]}}</td>
+                                <!-- <td>Row 4</td>
+                                <td>Row 5</td> -->
+                            </tr> {% endfor %}
+                        </tbody>
+                      </table>
+                      <div>
+                        <form action={{url_for("boards.pushToMonday") }} method="POST">
+                            <label for="work_order_data">{{data.serviceRows|length}} total service rows </label>
+                            <input type="text" id="text_field" value="{{data}}" name="work_order_data" style="display:none;">
+                            <button type="submit">Next</button>
+                        </form>
+                      </div>
+                    </div>
+                    <hr>
+               
+                </div>
+            </div>
+
+           
+
+        </div>
+
+            </div>
+        </div> 
+    </div>
+
+</div>
+
+<script src={{ url_for("static", filename="js/demo/chart-bar-demo.js")}}></script>
+
+{% endblock %}
